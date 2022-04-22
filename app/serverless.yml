@@ -29,15 +29,40 @@ package:
 functions:
   list:
     handler: functions/list.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+        Resource: "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${env:DYNAMODB_TABLE}" 
 
   get:
     handler: functions/get.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:GetItem
+        Resource: "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${env:DYNAMODB_TABLE}"
 
   create:
     handler: functions/create.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${env:DYNAMODB_TABLE}"  
 
   update:
     handler: functions/update.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem
+        Resource: "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${env:DYNAMODB_TABLE}"  
 
   delete:
     handler: functions/delete.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem
+        Resource: "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${env:DYNAMODB_TABLE}"
