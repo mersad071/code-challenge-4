@@ -22,7 +22,7 @@ const deleteItemModel = object.keys({
 
 const listItemsModel = object.keys({
   limit: number.min(1).max(50),
-  nextToken: string.optional(),
+  nextToken: string.allow(null, '')
 });
 
 module.exports = { 
