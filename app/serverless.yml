@@ -9,7 +9,7 @@ provider:
   deploymentBucket:
     name: code-challenge-4-${self:provider.region}-${aws:accountId}
     serverSideEncryption: AES256
-  enviroment:
+  environment:
     DYNAMODB_TABLE: ${param:tableName}
 plugins:
   - serverless-deployment-bucket
@@ -18,6 +18,13 @@ plugins:
 
 custom:
   appSync: ${file(appsync.yml)}
+
+package:
+  patterns:
+    - '!../node_modules/**'
+    - '../node_modules/joi/**'
+    - '../node_modules/@happy/**'
+    - '../node_modules/@sideway/**'
 
 functions:
   list:
