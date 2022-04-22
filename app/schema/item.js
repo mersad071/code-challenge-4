@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { object, string, date } = Joi.types();
+const { object, string, date, number } = Joi.types();
 
 const createItemModel = object.keys({
   PK: string.required(),
@@ -20,8 +20,14 @@ const deleteItemModel = object.keys({
   id: string.guid().required()
 });
 
+const listItemsModel = object.keys({
+  limit: number.min(1).max(50),
+  nextToken: string,
+});
+
 module.exports = { 
   createItemModel,
   updateItemModel,
-  deleteItemModel
+  deleteItemModel,
+  listItemsModel
 }
