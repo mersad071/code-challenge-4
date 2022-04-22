@@ -37,7 +37,7 @@ type Query {
   listItems(input: ListItemsInput): ListItemsResult!
 }
 
-type Mutations {
+type Mutation {
   createItem(input: CreateItemInput!): Item!
   updateItem(input: UpdateItemInput!): Item!
   deleteItem(input: DeleteItemInput!): Item!
@@ -45,5 +45,5 @@ type Mutations {
 
 schema {
   query: Query
-  mutation: Mutations
+  mutation: Mutation
 }

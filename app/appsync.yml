@@ -11,26 +11,31 @@ mappingTemplates:
     field: listItems
     request: false
     response: false
+
   - dataSource: getItem
     type: Query
     field: getItem
     request: false
     response: false
+
   - dataSource: createItem
     type: Mutation
     field: createItem
     request: false
     response: false
+
   - dataSource: updateItem
     type: Mutation
     field: updateItem
     request: false
     response: false
+
   - dataSource: deleteItem
     type: Mutation
     field: deleteItem
     request: false
     response: false
+
 dataSources:
   - type: AWS_LAMBDA
     name: listItems
