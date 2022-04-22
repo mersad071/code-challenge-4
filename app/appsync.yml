@@ -1,16 +1,21 @@
 name: ${self:service}-${self:provider.stage}
-schema: schema.graphql 
+schema: schema.graphql
+authenticationType: AMAZON_COGNITO_USER_POOLS
+userPoolConfig:
+  awsRegion: ${self:provider.region}
+  defaultAction: ALLOW
+  userPoolId: ${param:userPoolId}
 mappingTemplates:
-  - dataSource: listTodos
+  - dataSource: listItems
     type: Query
-    field: listTodos
+    field: listItems
     request: false
     response: false
 dataSources:
   - type: AWS_LAMBDA
-    name: list
+    name: listItems
     config:
-      functionName: list        
+      functionName: list
 defaultMappingTemplates:
   request: false
   response: false

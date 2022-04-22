@@ -52,3 +52,7 @@ resources:
       Properties:
         UserPoolId: !Ref UserPool
         Domain: cc4-${self:provider.region}-${self:provider.stage}
+
+  Outputs:
+    UserPoolId:
+      Value: !Ref UserPool

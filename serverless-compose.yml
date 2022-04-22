@@ -8,3 +8,5 @@ services:
 
   app:
     path: app
+    params:
+      userPoolId: ${cognito.UserPoolId}
