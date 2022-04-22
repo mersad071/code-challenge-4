@@ -15,7 +15,7 @@ input ListItemsInput {
 }
 
 input CreateItemInput {
-  name: String
+  name: String!
 }
 
 input UpdateItemInput {
@@ -24,7 +24,7 @@ input UpdateItemInput {
 }
 
 input DeleteItemInput {
-  id: ID
+  id: ID!
 }
 
 type ListItemsResult {
@@ -45,5 +45,5 @@ type Mutations {
 
 schema {
   query: Query
-  mutations: Mutations
+  mutation: Mutations
 }
