@@ -25,7 +25,7 @@ const handler = async event => {
       Item
     }).promise();
 
-    return Item;
+    return { Item };
   } catch(err) {
     console.log(err);
     return err;

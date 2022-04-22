@@ -31,5 +31,5 @@ resources:
             KeyType: RANGE
 
   Outputs:
-    tableName:
+    TableName:
       Value: !Ref CodeChallangeTable
