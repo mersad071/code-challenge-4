@@ -18,7 +18,7 @@ const handler = async event => {
       createdAt: now,
       updatedAt: now
     }
-    createItemModel.validate(Item);
+    await createItemModel.validateAsync(Item);
     
     await ddb.put({
       TableName: process.env.DYNAMODB_TABLE,
@@ -26,7 +26,7 @@ const handler = async event => {
     }).promise();
 
     return { Item };
-    
+
   } catch(err) {
     console.log(err);
     return err;

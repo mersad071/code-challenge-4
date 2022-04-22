@@ -23,7 +23,7 @@ package:
   patterns:
     - '!../node_modules/**'
     - '../node_modules/joi/**'
-    - '../node_modules/@happy/**'
+    - '../node_modules/@hapi/**'
     - '../node_modules/@sideway/**'
 
 functions:
