@@ -1,0 +1,30 @@
+service: code-challenge-4
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  deploymentBucket:
+    name: code-challenge-4-${self:provider.region}-${aws:accountId}
+    serverSideEncryption: AES256
+
+plugins:
+  - serverless-deployment-bucket
+  - serverless-iam-roles-per-function
+
+functions:
+  list:
+    handler: functions/list.handler
+
+  get:
+    handler: functions/get.handler
+
+  create:
+    handler: functions/create.handler
+
+  update:
+    handler: functions/update.handler
+
+  delete:
+    handler: functions/delete.handler

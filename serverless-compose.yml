@@ -1,0 +1,10 @@
+services:
+
+  cognito:
+    path: infrastructure/cognito
+
+  dynamodb:
+    path: infrastructure/dynamodb
+
+  app:
+    path: app

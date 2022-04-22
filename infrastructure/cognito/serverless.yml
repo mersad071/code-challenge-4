@@ -1,0 +1,54 @@
+service: code-challenge-4-auth
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  deploymentBucket:
+    name: code-challenge-4-${self:provider.region}-${aws:accountId}
+    serverSideEncryption: AES256
+
+plugins:
+  - serverless-deployment-bucket
+
+resources:
+  Resources:
+    UserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:service}-${self:provider.stage}-userpool
+        UsernameAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 6
+            RequireLowercase: true
+            RequireNumbers: true
+            RequireSymbols: false
+            RequireUppercase: true
+        EmailConfiguration:
+          EmailSendingAccount: COGNITO_DEFAULT
+
+    UserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        AllowedOAuthFlows:
+          - implicit
+        ClientName: ${self:service}-${self:provider.stage}
+        CallbackURLs: 
+          - http://localhost:3000/callback
+        ExplicitAuthFlows:
+          - ALLOW_USER_PASSWORD_AUTH
+          - ALLOW_USER_SRP_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+        GenerateSecret: false
+        SupportedIdentityProviders: 
+          - COGNITO
+        UserPoolId: !Ref UserPool
+
+    UserPoolDomain:
+      Type: AWS::Cognito::UserPoolDomain 
+      Properties:
+        UserPoolId: !Ref UserPool
+        Domain: cc4-${self:provider.region}-${self:provider.stage}

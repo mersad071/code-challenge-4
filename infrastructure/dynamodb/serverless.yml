@@ -1,0 +1,35 @@
+service: code-challenge-4-dynamodb
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  deploymentBucket:
+    name: code-challenge-4-${self:provider.region}-${aws:accountId}
+    serverSideEncryption: AES256
+
+plugins:
+  - serverless-deployment-bucket
+
+resources:
+  Resources:
+    CodeChallangeTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: code-challenge-4-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S                                                           
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+
+  Outputs:
+    tableName:
+      Value: !Ref CodeChallangeTable
