@@ -3,12 +3,14 @@ frameworkVersion: '3'
 
 provider:
   name: aws
+  runtime: nodejs14.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
   deploymentBucket:
     name: code-challenge-4-${self:provider.region}-${aws:accountId}
     serverSideEncryption: AES256
-
+  enviroment:
+    DYNAMODB_TABLE: ${param:tableName}
 plugins:
   - serverless-deployment-bucket
   - serverless-iam-roles-per-function

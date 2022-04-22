@@ -10,3 +10,4 @@ services:
     path: app
     params:
       userPoolId: ${cognito.UserPoolId}
+      tableName: ${dynamodb.tableName}
