@@ -10,13 +10,13 @@ const createItemModel = object.keys({
   updatedAt: date.iso()
 });
 
-const updateItemModel = object({
+const updateItemModel = object.keys({
   id: string.guid().required(),
   name: string.alphanum().min(1).max(30),
   updatedAt: date.iso()
 });
 
-const deleteItemModel = object({
+const deleteItemModel = object.keys({
   id: string.guid().required()
 });
 
