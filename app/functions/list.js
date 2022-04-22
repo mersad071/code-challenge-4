@@ -16,14 +16,13 @@ const handler = async event => {
         "#PK": "PK",
       },
       Limit: limit ?? 5,
-      ExclusiveStartKey: nextToken,
+      ExclusiveStartKey: nextToken || null,
       ScanIndexForward: false,
       ConsistentRead: false,
       Select: "ALL_ATTRIBUTES",
     }
     const { Items, LastEvaluatedKey } = await ddb.query(params).promise();
-    
-    return { Items, nextToken: LastEvaluatedKey ? Buffer.from(JSON.stringify(LastEvaluatedKey)).toString('base64') : null };
+    return { items: Items, nextToken: LastEvaluatedKey ? Buffer.from(LastEvaluatedKey, 'base64').toString('utf8') : null };
   } catch(err) {
     console.log(err);
     return err;
