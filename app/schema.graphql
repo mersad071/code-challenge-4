@@ -1,0 +1,24 @@
+type Item {
+  id: ID
+  name: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  listItems(input: ListItemsInput): ListItemsResult!
+}
+
+schema {
+  query: Query
+}
+
+input ListItemsInput {
+  limit: Int
+  nextToken: String
+}
+
+type ListItemsResult {
+  items: [Item!]!
+  nextToken: String
+}

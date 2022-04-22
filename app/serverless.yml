@@ -12,6 +12,7 @@ provider:
 plugins:
   - serverless-deployment-bucket
   - serverless-iam-roles-per-function
+  - serverless-appsync-plugin
 
 functions:
   list:

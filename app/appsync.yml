@@ -1,0 +1,16 @@
+name: ${self:service}-${self:provider.stage}
+schema: schema.graphql 
+mappingTemplates:
+  - dataSource: listTodos
+    type: Query
+    field: listTodos
+    request: false
+    response: false
+dataSources:
+  - type: AWS_LAMBDA
+    name: list
+    config:
+      functionName: list        
+defaultMappingTemplates:
+  request: false
+  response: false
