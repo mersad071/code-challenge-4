@@ -17,8 +17,8 @@ const handler = async event => {
         SK: `item#${id}`,
       },
       ReturnValues: "ALL_OLD",
-    });
-
+    }).promise();
+    
     return Attributes;
     
   } catch(err) {
