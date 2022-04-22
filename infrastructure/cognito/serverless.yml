@@ -20,9 +20,11 @@ resources:
         UserPoolName: ${self:service}-${self:provider.stage}-userpool
         UsernameAttributes:
           - email
+        AutoVerifiedAttributes:
+          - email
         Policies:
           PasswordPolicy:
-            MinimumLength: 6
+            MinimumLength: 8
             RequireLowercase: true
             RequireNumbers: true
             RequireSymbols: false
@@ -35,6 +37,13 @@ resources:
       Properties:
         AllowedOAuthFlows:
           - implicit
+        AllowedOAuthFlowsUserPoolClient: true
+        AllowedOAuthScopes:
+          - phone
+          - email
+          - openid
+          - profile
+          - aws.cognito.signin.user.admin
         ClientName: ${self:service}-${self:provider.stage}
         CallbackURLs: 
           - http://localhost:3000/callback
