@@ -56,11 +56,6 @@ resources:
           - COGNITO
         UserPoolId: !Ref UserPool
 
-    UserPoolDomain:
-      Type: AWS::Cognito::UserPoolDomain 
-      Properties:
-        UserPoolId: !Ref UserPool
-        Domain: cc4-${self:provider.region}-${self:provider.stage}
 
   Outputs:
     UserPoolId:
