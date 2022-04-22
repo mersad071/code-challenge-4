@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mersad071/code-challenge-4#readme",
   "devDependencies": {
     "@serverless/compose": "^1.0.0",
+    "serverless": "^3.15.2",
     "serverless-appsync-plugin": "^1.13.0",
     "serverless-deployment-bucket": "^1.5.2",
     "serverless-iam-roles-per-function": "^3.2.0"
