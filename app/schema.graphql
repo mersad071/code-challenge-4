@@ -5,12 +5,8 @@ type Item {
   updatedAt: String
 }
 
-type Query {
-  listItems(input: ListItemsInput): ListItemsResult!
-}
-
-schema {
-  query: Query
+input GetItemInput {
+  id: ID!
 }
 
 input ListItemsInput {
@@ -18,7 +14,36 @@ input ListItemsInput {
   nextToken: String
 }
 
+input CreateItemInput {
+  name: String
+}
+
+input UpdateItemInput {
+  id: ID!
+  name: String
+}
+
+input DeleteItemInput {
+  id: ID
+}
+
 type ListItemsResult {
   items: [Item!]!
   nextToken: String
+}
+
+type Query {
+  getItem(input: GetItemInput): Item!
+  listItems(input: ListItemsInput): ListItemsResult!
+}
+
+type Mutations {
+  createItem(input: CreateItemInput!): Item!
+  updateItem(input: UpdateItemInput!): Item!
+  deleteItem(input: DeleteItemInput!): Item!
+}
+
+schema {
+  query: Query
+  mutations: Mutations
 }
