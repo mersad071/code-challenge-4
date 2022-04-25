@@ -1,0 +1,34 @@
+name: deploy frontend prod
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - cc4-frontend/**
+      - .github/workflows/deploy-frontend-prod.yml
+
+concurrency: build
+
+jobs:
+  build:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - name: Deploy
+        run: |
+          cd cc4-frontend
+          npm i
+          cp ./src/aws-dev.js ./src/aws.js
+          npm run build
+          accountId=$(aws sts get-caller-identity --output text --query 'Account')
+          aws s3 sync build/ s3://cc4-prod-${accountId}/ --acl public-read

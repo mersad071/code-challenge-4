@@ -53,6 +53,11 @@ Workflow is created using GitHub Actions. Push or merge pull request to trigger 
 
 ## Frontend
 
-The frontend application is built with React and is located in cc4-frontend folder.
+The frontend application is built with React and is located in cc4-frontend folder. Application is deployed to the S3 bucket created in the backend. It can be deployed only using the CI/CD workflow. If you want to test the application locally, you can use the following command:
+
+```
+cd cc4-frontend
+npm run start
+```
 
 To read more about the frontend application, please visit [README.md](./cc4-frontend/README.md) in the `cc4-frontend` folder.
