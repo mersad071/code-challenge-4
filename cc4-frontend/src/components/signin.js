@@ -1,4 +1,4 @@
-import { Input, FormControl, InputLabel, Button } from '@mui/material';
+import { Input, FormControl, InputLabel, Button, Grid } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from './context';
@@ -37,32 +37,36 @@ export default function Signin() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <InputLabel htmlFor="email">Email</InputLabel>
-        <Input type='email' id="email" name="email" />
-      </FormControl>
-      
-      <FormControl>
-        <InputLabel htmlFor="password">Password</InputLabel>
-        <Input type='password' id="password" name="password" />
-      </FormControl>
+    <Grid container spacing={0} alignItems="center" justifyContent="center">
+      <Grid item xs={6}>
+        <form onSubmit={handleSubmit}>
+          <FormControl>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Input type='email' id="email" name="email" />
+          </FormControl>
+          
+          <FormControl>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input type='password' id="password" name="password" />
+          </FormControl>
 
-      {
-        showConfirm && <FormControl>
-          <InputLabel htmlFor="code">Confirmation Code</InputLabel>
-          <Input type='text' id="code" name="code" />
-        </FormControl>
-      }
+          {
+            showConfirm && <FormControl>
+              <InputLabel htmlFor="code">Confirmation Code</InputLabel>
+              <Input type='text' id="code" name="code" />
+            </FormControl>
+          }
 
-      <FormControl fullWidth={true}>
-        <Button type='submit' color='primary' variant='contained'>
-          Signin
-        </Button>
-        <Button onClick={handleSignUp} type='button' color='primary' variant='contained'>
-          Signup
-        </Button>
-      </FormControl>
-    </form>
+          <FormControl fullWidth={true}>
+            <Button type='submit' color='primary' variant='contained'>
+              Signin
+            </Button>
+            <Button onClick={handleSignUp} type='button' color='primary' variant='contained'>
+              Signup
+            </Button>
+          </FormControl>
+        </form>
+      </Grid>
+    </Grid>
   );
 }
