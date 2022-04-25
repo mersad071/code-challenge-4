@@ -20,7 +20,7 @@ resources:
       Properties:
         BucketName: 'cc4-${self:provider.stage}-${aws:accountId}'
         PublicAccessBlockConfiguration:
-          BlockPublicAcls : true
+          BlockPublicAcls : false
           BlockPublicPolicy : true
           IgnorePublicAcls : true
           RestrictPublicBuckets : true
