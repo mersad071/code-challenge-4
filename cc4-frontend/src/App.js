@@ -7,6 +7,7 @@ import AuthGuard from './auth-guard';
 import { ThemeProvider } from '@emotion/react';
 import darkTheme from './ui/theme';
 import Nav from './components/nav';
+import ItemForm from './components/item-form';
 
 function App() {
   return (
@@ -27,6 +28,12 @@ function App() {
                 <AuthGuard>
                   <Nav />
                   <Dashboard />
+                </AuthGuard>
+              } />
+              <Route exact path="/add-item" element={
+                <AuthGuard>
+                  <Nav />
+                  <ItemForm />
                 </AuthGuard>
               } />
           </Routes>

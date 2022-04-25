@@ -17,6 +17,7 @@ const get = async (id) => {
 }
 
 const add = async (item) => {
+  console.log(item);
   const result = (await API.graphql(
     graphqlOperation(createItem, { input: item })
   ));

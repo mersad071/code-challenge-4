@@ -23,7 +23,12 @@ export default function Dashboard() {
       .catch(err => console.log('something is wrong', err));
   }, [context]);
 
+  const handleUpdate = (event) => {
+    console.log(event);
+  }
+
   return (
+
     <div className='p-2'>
       <h2>Dashboard</h2>
       <div className='text-right' style={{ marginTop: '-2em' }}>
@@ -31,12 +36,22 @@ export default function Dashboard() {
         <br/>
       </div>
 
-      <Grid container spacing={0} justifyContent="start">
+      <Grid container spacing={1} justifyContent="start">
         {items.map(item => (
           <Grid item xs={6} md={3} key={item.id}>
             <Card sx={{ minWidth: 275, marginTop: '1em' }}>
               <CardContent>
-                {item.name}
+                <p>
+                  <strong>Name:</strong> {item.name}
+                </p>
+                <p className='text-muted'>
+                  <br/>
+                  <strong>Created:</strong> {item.createdAt}
+                </p>
+                <p className='text-muted'>
+                  <strong>Last update:</strong> {item.updatedAt}
+                </p>
+                <Button onClick={ () => { navigate('/add-item', { state: item }) } }> Update </Button>
               </CardContent>
             </Card>
           </Grid>
