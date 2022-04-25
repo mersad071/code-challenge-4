@@ -28,7 +28,7 @@ jobs:
         run: |
           cd cc4-frontend
           npm i
-          cp ./aws-dev.js aws.js
+          cp ./src/aws-dev.js ./src/aws.js
           npm run build
           accountId=$(aws sts get-caller-identity --output text --query 'Account')
           aws s3 sync build/ s3://cc4-dev-${accountId}/ --acl public-read
