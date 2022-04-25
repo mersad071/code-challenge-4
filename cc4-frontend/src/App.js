@@ -3,6 +3,7 @@ import Dashboard from './components/dashboard';
 import Signin from './components/signin';
 import Signup from './components/signup';
 import { ContextProvider } from './components/context';
+import AuthGuard from './auth-guard';
 
 function App() {
   return (
@@ -10,10 +11,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={
-            <Dashboard />
+            <AuthGuard>
+              <Dashboard />
+            </AuthGuard>
           } />
           <Route exact path="/dashboard" element={
-            <Dashboard />
+            <AuthGuard>
+              <Dashboard />
+            </AuthGuard>
           } />
           <Route exact path="/signin" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
