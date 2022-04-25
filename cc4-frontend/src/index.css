@@ -13,3 +13,30 @@ body{
   color: #555;
   font-size: .8em;
 }
+
+.p-2{
+  padding: 2em;
+}
+
+nav{
+  background-color: rgba(137, 108, 192, .9);
+  margin-bottom: 1em;
+  padding: 1em 0;
+  text-align: center;
+}
+
+.link{
+  padding: 1em;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.link:hover{
+  background-color: rgba(92, 37, 194, 0.9);
+  transition: background-color 300ms linear;
+}
+
+.text-right{
+  text-align: right;
+}

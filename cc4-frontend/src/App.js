@@ -6,6 +6,7 @@ import { ContextProvider } from './components/context';
 import AuthGuard from './auth-guard';
 import { ThemeProvider } from '@emotion/react';
 import darkTheme from './ui/theme';
+import Nav from './components/nav';
 
 function App() {
   return (
@@ -13,18 +14,21 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={
-              <AuthGuard>
-                <Dashboard />
-              </AuthGuard>
-            } />
-            <Route exact path="/dashboard" element={
-              <AuthGuard>
-                <Dashboard />
-              </AuthGuard>
-            } />
             <Route exact path="/signin" element={<Signin />} />
-            <Route exact path="/signup" element={<Signup />} />
+              <Route exact path="/signup" element={<Signup />} />
+
+              <Route exact path="/" element={
+                <AuthGuard>
+                  <Nav />
+                  <Dashboard />
+                </AuthGuard>
+              } />
+              <Route exact path="/dashboard" element={
+                <AuthGuard>
+                  <Nav />
+                  <Dashboard />
+                </AuthGuard>
+              } />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
