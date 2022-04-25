@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: build
+
+jobs:
+  build:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - name: Install Serverless Framework CLI
+        run: |
+          npm i -g serverless
+          npm i
+      - name: Deploy
+        run: |
+          sls deploy --stage prod

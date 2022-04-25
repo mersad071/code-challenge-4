@@ -37,7 +37,7 @@ export default function Dashboard() {
     <div className='p-2'>
       <h2>Dashboard</h2>
       <div className='text-right' style={{ marginTop: '-2em' }}>
-        <Button onClick={ handleSignOut }>Sign Out</Button>
+        <Button color='error' variant='outlined' onClick={ handleSignOut }>Sign Out</Button>
         <br/>
       </div>
 
