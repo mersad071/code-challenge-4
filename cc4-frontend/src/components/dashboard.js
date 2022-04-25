@@ -25,6 +25,11 @@ export default function Dashboard() {
 
   const handleDelete = (id) => {
     remove(id)
+      .then(() => {
+        const newItems = items.filter(item => item.id !== id);
+        setItems(newItems);
+      })
+      .catch(err => console.log('something is wrong', err));
   }
 
   return (
