@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, Button, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Context from './context';
-import { list } from './data';
+import { list, remove } from './data';
 export default function Dashboard() {
 
   const [items, setItems] = React.useState([]);
@@ -23,8 +23,8 @@ export default function Dashboard() {
       .catch(err => console.log('something is wrong', err));
   }, [context]);
 
-  const handleUpdate = (event) => {
-    console.log(event);
+  const handleDelete = (id) => {
+    remove(id)
   }
 
   return (
@@ -52,6 +52,7 @@ export default function Dashboard() {
                   <strong>Last update:</strong> {item.updatedAt}
                 </p>
                 <Button onClick={ () => { navigate('/add-item', { state: item }) } }> Update </Button>
+                <Button onClick={ () => { handleDelete(item.id) } }> Delete </Button>
               </CardContent>
             </Card>
           </Grid>

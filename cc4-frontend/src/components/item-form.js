@@ -1,24 +1,28 @@
 import { Button, Card, CardContent, FormControl, Grid, Input, InputLabel } from "@mui/material";
-import React, { useRef } from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { add, update } from './data';
 
 function ItemForm(){
   const { state } = useLocation();
   const navigate = useNavigate();
-  const ref = useRef(state.name);
+
+  const [item, setItem] = React.useState(state || {name: ''});
+
+  const onChange = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
+    event.preventDefault();    
     if (state) {
-      state.name = name;
-      update(state)
+      const { id, name } = item;
+      update({ id, name })
         .then(() => navigate('/dashboard'))
         .catch(err => console.log(err));
       return;
     }
-    add({ name })
+    add({ name: item.name })
       .then(() => navigate('/dashboard'))
       .catch(err => console.log(err));
   }
@@ -34,7 +38,7 @@ function ItemForm(){
               <form onSubmit={handleSubmit}>
                 <FormControl fullWidth={true} margin='normal'>
                   <InputLabel htmlFor="name">Name</InputLabel>
-                  <Input type='text' id="name" name="name" ref={ref} />
+                  <Input value={item?.name} type='text' id="name" name="name" onChange={onChange} />
                 </FormControl>
 
                 <FormControl fullWidth={true}>
