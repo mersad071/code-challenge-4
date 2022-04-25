@@ -1,12 +1,12 @@
-name: build
+name: deploy frontend dev
 
 on:
   push:
     branches:
-      - main
+      - dev
     paths:
-      - infrastructure/**
-      - app/**
+      - cc4-frontend/**
+      - .github/workflows/deploy-frontend-dev.yml
 
 concurrency: build
 
@@ -18,16 +18,19 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'us-east-1'
 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: "14"
-      - name: Install Serverless Framework CLI
-        run: |
-          npm i -g serverless
-          npm i
       - name: Deploy
         run: |
-          sls deploy --stage prod
+          cd cc4-frontend
+          npm i
+          cp ./src/aws-dev.js ./src/aws.js
+          npm run build
+          accountId=$(aws sts get-caller-identity --output text --query 'Account')
+          echo $accountId
+          aws s3 sync build/ s3://cc4-dev-${accountId} --acl public-read

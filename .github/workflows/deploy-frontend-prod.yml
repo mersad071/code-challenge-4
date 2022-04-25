@@ -1,12 +1,12 @@
-name: build
+name: deploy frontend prod
 
 on:
   push:
     branches:
       - main
     paths:
-      - infrastructure/**
-      - app/**
+      - cc4-frontend/**
+      - .github/workflows/deploy-frontend-prod.yml
 
 concurrency: build
 
@@ -24,10 +24,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "14"
-      - name: Install Serverless Framework CLI
-        run: |
-          npm i -g serverless
-          npm i
       - name: Deploy
         run: |
-          sls deploy --stage prod
+          cd cc4-frontend
+          npm i
+          cp ./src/aws-dev.js ./src/aws.js
+          npm run build
+          accountId=$(aws sts get-caller-identity --output text --query 'Account')
+          aws s3 sync build/ s3://cc4-prod-${accountId}/ --acl public-read

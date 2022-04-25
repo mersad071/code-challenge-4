@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - dev
+    paths:
+      - infrastructure/**
+      - app/**
 
 concurrency: build
 
