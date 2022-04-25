@@ -22,7 +22,7 @@ const handler = async event => {
       Select: "ALL_ATTRIBUTES",
     }
     const { Items, LastEvaluatedKey } = await ddb.query(params).promise();
-    return { items: Items, nextToken: LastEvaluatedKey ? Buffer.from(LastEvaluatedKey, 'base64').toString('utf8') : null };
+    return { items: Items || [], nextToken: LastEvaluatedKey ? Buffer.from(LastEvaluatedKey, 'base64').toString('utf8') : null };
   } catch(err) {
     console.log(err);
     return err;
