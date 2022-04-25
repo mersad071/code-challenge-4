@@ -1,4 +1,4 @@
-name: build
+name: deploy frontend dev
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - dev
     paths:
       - cc4-frontend/**
+      - .github/workflows/deploy-frontend-dev.yml
 
 concurrency: build
 
