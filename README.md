@@ -43,7 +43,7 @@ sls deploy --region us-east-1
 
 ### CI/CD
 
-Workflow is created using GitHub Actions. Push or merge pull request to trigger deployment. Dev branch will deploy to dev stage, while production will deploy to prod stage. In order to setup CI/CD you will need to add the following GitHub secrets: 
+Workflow is created using GitHub Actions. Push or merge pull request to trigger deployment. Dev branch will deploy to dev stage, while push on main branch will deploy to prod stage. In order to setup CI/CD you will need to add the following GitHub secrets: 
 
   - `AWS_ACCESS_KEY_ID`
   - `AWS_SECRET_ACCESS_KEY`
