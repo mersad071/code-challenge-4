@@ -51,18 +51,22 @@ export default function Dashboard() {
                 </p>
                 <p className='text-muted'>
                   <br/>
-                  <strong>Created:</strong> {item.createdAt}
+                  <strong>Created:</strong> {new Date(item.createdAt).toLocaleString()}
                 </p>
                 <p className='text-muted'>
-                  <strong>Last update:</strong> {item.updatedAt}
+                  <strong>Last update:</strong>  {new Date(item.updatedAt).toLocaleString()}
                 </p>
                 <Button onClick={ () => { navigate('/add-item', { state: item }) } }> Update </Button>
-                <Button onClick={ () => { handleDelete(item.id) } }> Delete </Button>
+                <Button onClick={ () => { handleDelete(item.id) } } color='error'> Delete </Button>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
+      <div>
+        <br/>
+        <Button onClick={ ()=>{ navigate('/add-item') } } variant='contained' >Add Item</Button>
+      </div>
     </div>
   );
 }
