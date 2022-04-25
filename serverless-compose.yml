@@ -6,6 +6,9 @@ services:
   dynamodb:
     path: infrastructure/dynamodb
 
+  cloudfront:
+    path: infrastructure/cloudfront    
+
   app:
     path: app
     params:
